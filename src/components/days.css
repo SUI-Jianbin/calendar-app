@@ -1,0 +1,35 @@
+.weekdays-short-name{
+    color:black;
+    padding:2px
+}
+
+.today{
+    color: tomato
+}
+
+.all-days{
+    color:black;
+    padding: 2px;
+    margin: 2px;
+    font-weight: 500
+    
+}
+.weekend{
+    color: rgb(98, 98, 185)
+}
+.calendar-day{
+    display: inline;
+    padding: 2px;
+    margin: 2px;
+    background-color:rgb(224, 220, 213);
+    font-weight: bold;
+    
+
+}
+.day-cell{
+    cursor: pointer
+}
+.day-cell:hover{
+    background: pink
+}
+
