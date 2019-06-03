@@ -4,18 +4,14 @@ import moment from 'moment'
 import './days.css'
 
 export default class Days extends React.Component {
-    constructor(props) {
-        super(props)
-
-    }
+ 
     state = {
         currentDay: moment(),
         selectedDay: false,
         detailInfo: '',
         markedDays:this.props.markdays,
         markedDay:'',
-        detailDay:'',
-        key:''
+        detailDay:''
     }
     weekdaysShort = moment.weekdaysShort()
     firstDayOfMonth = () => {
@@ -26,7 +22,7 @@ export default class Days extends React.Component {
         return firstDay
     }
     currentDay = () => {
-        if(this.props.date.format('l')==this.state.currentDay.format('l'))
+        if(this.props.date.format('l')===this.state.currentDay.format('l'))
         return this.state.currentDay.format('D')   
       }
     daysInMonth = () =>{
@@ -37,11 +33,10 @@ export default class Days extends React.Component {
     onDayClick = (e, d) => {
         this.setState({
             selectedDay: true,
-            key:this.props.date+d
+            detailDay: this.props.date+d
         },
         () =>{
-            let detailDay = this.props.date+d
-            this.sendDetailInfo(detailDay)
+            this.sendDetailInfo(this.state.detailDay)
         })
     }
     sendDetailInfo = (detailDay) =>{
@@ -66,21 +61,21 @@ export default class Days extends React.Component {
         let markedday =""
         let days = []
         let markkey ={}
-        markkey[this.state.key] = this.state.markedDays
+        markkey[this.state.detailDay] = this.state.markedDays
         for (let d = 1; d <= this.daysInMonth(); d++) {
             let currentday = (d == this.currentDay() ? "today" : "all-days")
             let allCells = d+Number(this.firstDayOfMonth())
             let weekend = ((allCells%7===0||allCells%7===1) ?"weekend":"")
-// in oder to show different color by select different types of day~~~~some problem here
-         if(this.state.markedDays[this.props.date+d] &&this.state.markedDays[this.props.date+d].holiday==true){
+// in oder to show different color by select different types of day
+         if(this.state.markedDays[this.props.date+d] && this.state.markedDays[this.props.date+d].holiday===true){
                 markedday = "holiday"
-            }if(this.state.markedDays[this.props.date+d] &&this.state.markedDays[this.props.date+d].birthday==true){
+            }if(this.state.markedDays[this.props.date+d] &&this.state.markedDays[this.props.date+d].birthday===true){
                 markedday = "birthday"
             }
-            if(this.state.markedDays[this.props.date+d] &&this.state.markedDays[this.props.date+d].busy==true){
+            if(this.state.markedDays[this.props.date+d] &&this.state.markedDays[this.props.date+d].busy===true){
                 markedday = "busy"
             }
-            if(this.state.markedDays[this.props.date+d] &&this.state.markedDays[this.props.date+d].anniversary==true){
+            if(this.state.markedDays[this.props.date+d] &&this.state.markedDays[this.props.date+d].anniversary===true){
                 markedday = "anniversary"
             }
         if((this.state.markedDays[this.props.date+d])&& !(this.state.markedDays[this.props.date+d])==""){
@@ -118,7 +113,7 @@ export default class Days extends React.Component {
           }
         })
         let daysInMonth = rows.map((d, i) => {
-        if(this.state.selectedDay==true){
+        if(this.state.selectedDay===true){
           return <tr key={i} >
           {d} 
           </tr>

@@ -6,10 +6,6 @@ import './months.css'
 
 export default class Months extends React.Component {
 
-    constructor(props){
-        super(props)
-    }
-
     state = {
         allMonths: moment.months(),
         monthsObject: moment() 
