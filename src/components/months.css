@@ -1,3 +1,15 @@
 .allmonths {
     margin:15px;
 }
+.month-title{
+    display: inline;
+    text-align: center;
+    margin-left: 90px;
+    font-size: 20px;
+    font-weight:500;
+    color:rgb(78, 148, 240)
+}
+.month-block{
+    display:inline-block;
+    margin: 10px
+}

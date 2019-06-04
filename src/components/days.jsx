@@ -6,11 +6,10 @@ import './days.css'
 export default class Days extends React.Component {
  
     state = {
+        markedDays:this.props.markdays,
         currentDay: moment(),
         selectedDay: false,
         detailInfo: '',
-        markedDays:this.props.markdays,
-        markedDay:'',
         detailDay:''
     }
     weekdaysShort = moment.weekdaysShort()
@@ -22,20 +21,20 @@ export default class Days extends React.Component {
         return firstDay
     }
     currentDay = () => {
-        if(this.props.date.format('l')===this.state.currentDay.format('l'))
+        if (this.props.date.format('l') === this.state.currentDay.format('l'))
         return this.state.currentDay.format('D')   
-      }
+    }
     daysInMonth = () =>{
         let daysInMonth = this.props.date.daysInMonth()
         return daysInMonth
-      }  
+    }  
 // binding day click event: pass day detail to calendar
     onDayClick = (e, d) => {
         this.setState({
             selectedDay: true,
-            detailDay: this.props.date+d
+            detailDay: this.props.date + d
         },
-        () =>{
+        () => {
             this.sendDetailInfo(this.state.detailDay)
         })
     }
@@ -58,44 +57,43 @@ export default class Days extends React.Component {
                 </td>
             )
         }
-        let markedday =""
+        let markedday = ""
         let days = []
-        let markkey ={}
+        let markkey = {}
         markkey[this.state.detailDay] = this.state.markedDays
         for (let d = 1; d <= this.daysInMonth(); d++) {
             let currentday = (d == this.currentDay() ? "today" : "all-days")
             let allCells = d+Number(this.firstDayOfMonth())
-            let weekend = ((allCells%7===0||allCells%7===1) ?"weekend":"")
+            let weekend = ((allCells%7 === 0||allCells%7 === 1) ?"weekend":"")
 // in oder to show different color by select different types of day
-         if(this.state.markedDays[this.props.date+d] && this.state.markedDays[this.props.date+d].holiday===true){
+            if(this.state.markedDays[this.props.date+d] && this.state.markedDays[this.props.date+d].holiday === true){
                 markedday = "holiday"
-            }if(this.state.markedDays[this.props.date+d] &&this.state.markedDays[this.props.date+d].birthday===true){
+            }if(this.state.markedDays[this.props.date+d] && this.state.markedDays[this.props.date+d].birthday === true){
                 markedday = "birthday"
             }
-            if(this.state.markedDays[this.props.date+d] &&this.state.markedDays[this.props.date+d].busy===true){
+            if(this.state.markedDays[this.props.date+d] && this.state.markedDays[this.props.date+d].busy === true){
                 markedday = "busy"
             }
-            if(this.state.markedDays[this.props.date+d] &&this.state.markedDays[this.props.date+d].anniversary===true){
+            if(this.state.markedDays[this.props.date+d] && this.state.markedDays[this.props.date+d].anniversary === true){
                 markedday = "anniversary"
             }
-        if((this.state.markedDays[this.props.date+d])&& !(this.state.markedDays[this.props.date+d])==""){
+           if((this.state.markedDays[this.props.date+d]) && !(this.state.markedDays[this.props.date+d])==""){
             days.push(
                 <td key={allCells} className ={"day-cell"}>
                     <span className = {`${currentday} ${weekend}  ${markedday}`} onClick = {e =>{this.onDayClick(e,d)}} >
-                    {d}
+                      {d}
                     </span>
                 </td>
             )
-        }else{
-            days.push(
-                <td key={allCells} className ={"day-cell"}>
-                    <span className = {`${currentday} ${weekend}`} onClick = {e =>{this.onDayClick(e,d)}} >
-                    {d}
-                    </span>
-                </td>
+            }else{
+                days.push(
+                    <td key={allCells} className ={"day-cell"}>
+                        <span className = {`${currentday} ${weekend}`} onClick = {e => {this.onDayClick(e,d)}} >
+                        {d}
+                        </span>
+                    </td>
             )}
         }
-    
         var totalSlots = [...blanks, ...days]
         let rows = []
         let cells = []
@@ -113,13 +111,13 @@ export default class Days extends React.Component {
           }
         })
         let daysInMonth = rows.map((d, i) => {
-        if(this.state.selectedDay===true){
-          return <tr key={i} >
-          {d} 
+        if(this.state.selectedDay === true){
+          return <tr key={i}>
+           {d} 
           </tr>
         }else{
             return <tr key={i}>
-            {d} 
+             {d} 
             </tr>
             }
         })

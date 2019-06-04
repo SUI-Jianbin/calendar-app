@@ -105,8 +105,8 @@ export default class Calendar extends React.Component {
         })
     }
     render () {
-        let showEvent = (this.state.isShowEvent == true ? "event-info" : "none-info")
-        let showDetail =(this.state.isShowDetail == true ? "detail-info" :"none-info")
+        let showEvent = (this.state.isShowEvent === true ? "event-info" : "none-info")
+        let showDetail =(this.state.isShowDetail === true ? "detail-info" :"none-info")
         return(
             <div>
                 <div className="calendar">2019 Calendar </div> 

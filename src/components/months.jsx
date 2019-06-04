@@ -16,7 +16,7 @@ export default class Months extends React.Component {
     }
 // get an array of all the months
     collectMonthsObject = () => {
-        let allMonths =[]
+        let allMonths = []
         for(let m =0; m < 12; m++) {
             let monthsObject = Object.assign({}, this.state.monthsObject)
             monthsObject =  moment(monthsObject).set('month', m)
@@ -27,7 +27,10 @@ export default class Months extends React.Component {
     render () {
         let monthsInYear = this.collectMonthsObject().map ((m, i) =>{
             return( 
-                <Days key= {i} date= {m} callbackFromDays = {this.getDetail} markdays = {this.props.markdays}></Days>
+                <div className="month-block" key= {i*100}>
+                    <span className="month-title">{m.format('MMMM')}</span>
+                    <Days key= {i} date={m} callbackFromDays = {this.getDetail} markdays = {this.props.markdays}></Days>
+                </div>
             )
         })
         return(
